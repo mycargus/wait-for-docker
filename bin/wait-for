@@ -19,7 +19,7 @@
 #     container:port. Default 1.
 
 # Example:
-#  docker run --rm -e WAIT_ATTEMPTS=10 wait-for postgres:5432 web:443
+#  docker run --rm -e WAIT_ATTEMPTS=10 mycargus/wait-for postgres:5432 web:443
 
 set -e
 

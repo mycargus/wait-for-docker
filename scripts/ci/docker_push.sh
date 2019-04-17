@@ -4,7 +4,7 @@
 
 set -ev
 
-docker build -t mycargus/hello_docker_world:latest .
+docker build -t mycargus/wait-for:latest .
 
 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-docker push mycargus/hello_docker_world:latest
+docker push mycargus/wait-for:latest
