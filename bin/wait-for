@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+# Use netcat to wait for container(s) to accept incoming connections on
+# specified port(s). Inject environment variables to customize behavior.
+
+# Args:
+#   - An array of at least one "host:port", separated by a space, each in the
+#     format container:port
+#
+#     For example: `postgres:5432 web:443`
+
+# Custom environment variables:
+#   WAIT_AFTER: How many seconds to wait after the container:port is accepting
+#     incoming connections. Default 0.
+#
+#   WAIT_ATTEMPTS: How many attempts to wait for the container:port. Default 30.
+#
+#   WAIT_INTERVAL: How many seconds between attempting to connect to
+#     container:port. Default 1.
+
+# Example:
+#  docker run --rm -e WAIT_ATTEMPTS=10 wait-for postgres:5432 web:443
+
+set -e
+
+wait_after=${WAIT_AFTER:-0}
+wait_attempts=${WAIT_ATTEMPTS:-30}
+wait_interval=${WAIT_INTERVAL:-1}
+
+for hostport in "$@"; do
+  i=0
+  while ! nc -z ${hostport/:/ }; do
+    sleep $wait_interval
+    echo "waiting for $hostport ... $i"
+
+    if [[ $i -ge $wait_attempts ]]; then
+      echo "not ready after $i seconds"
+      exit 1
+    fi
+    i=$((i+1))
+  done
+
+  echo "$hostport now available after $i seconds"
+
+  if [[ $wait_after -gt 0 ]]; then
+    echo "Waiting an additional $wait_after seconds ..."
+    sleep $wait_after
+  fi
+done
