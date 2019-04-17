@@ -1,0 +1,17 @@
+---
+services:
+  - docker
+
+addons:
+  apt:
+    packages:
+      - docker-ce
+
+env:
+  - DOCKER_COMPOSE_VERSION=1.23.2
+
+before_install: ./scripts/ci/upgrade_docker_compose.sh
+
+install: true
+
+script: ./scripts/ci/build.sh
