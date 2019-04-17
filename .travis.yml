@@ -15,3 +15,9 @@ before_install: ./scripts/ci/upgrade_docker_compose.sh
 install: true
 
 script: ./scripts/ci/build.sh
+
+deploy:
+  provider: script
+  script: ./scripts/ci/docker_push.sh
+  on:
+    branch: master
