@@ -2,6 +2,7 @@
   "name": "wait-for-docker",
   "version": "1.0.0",
   "description": "A slim docker container to determine if other containers are ready for connections",
+  "main": "",
   "scripts": {
     "pretty": "prettier --ignore-path ./.gitignore \"*.+(yaml|yml|js|json|md)\"",
     "format": "npm run pretty -- --write",
