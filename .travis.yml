@@ -1,4 +1,7 @@
 ---
+notifications:
+  email: false
+
 services:
   - docker
 
@@ -8,13 +11,22 @@ addons:
       - docker-ce
 
 env:
-  - DOCKER_COMPOSE_VERSION=1.23.2
+  - DOCKER_COMPOSE_VERSION=1.25.5
 
 before_install: ./scripts/ci/upgrade_docker_compose.sh
 
 install: true
 
-script: ./scripts/ci/build.sh
+jobs:
+  include:
+    - stage: lint, pull, build
+      script: "npm ci && npm run lint"
+    - stage: lint, pull, build
+      script: "docker-compose build --pull"
+    - stage: lint, pull, build
+      script: "docker-compose pull"
+    - stage: test
+      script: ./scripts/ci/test.sh
 
 deploy:
   provider: script
