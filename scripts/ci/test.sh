@@ -2,6 +2,9 @@
 
 set -ev
 
+docker-compose build --pull
+docker-compose pull
+
 docker-compose up -d web
 
 docker-compose run --rm wait-for web:8080 && echo $?

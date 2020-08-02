@@ -5,18 +5,9 @@ services:
   wait-for:
     build:
       context: .
-    networks:
-      - wait-for-docker-network
 
   web:
     command: "bash -c 'sleep 10 && ruby hello.rb -p 8080'"
     image: mycargus/hello_docker_world:master
-    networks:
-      - wait-for-docker-network
     ports:
       - '8080:8080'
-
-networks:
-  wait-for-docker-network:
-    driver: bridge
-    name: wait-for-docker-network
