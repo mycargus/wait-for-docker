@@ -30,6 +30,6 @@ jobs:
 
 deploy:
   provider: script
-  script: ./scripts/ci/docker_push.sh
+  script: ./scripts/ci/publish_docker_image.sh
   on:
     branch: master
