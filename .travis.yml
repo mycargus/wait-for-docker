@@ -23,9 +23,8 @@ jobs:
   include:
     - script: 'npm ci && npm run lint'
     - script: ./scripts/ci/test.sh
-
-deploy:
-  provider: script
-  script: ./scripts/ci/publish_docker_image.sh
-  on:
-    branch: master
+    - deploy:
+        provider: script
+        script: ./scripts/ci/publish_docker_image.sh
+        on:
+          branch: master
