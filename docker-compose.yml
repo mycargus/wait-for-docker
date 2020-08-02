@@ -10,7 +10,7 @@ services:
 
   web:
     command: "bash -c 'sleep 10 && ruby hello.rb -p 8080'"
-    image: mycargus/hello_docker_world:latest
+    image: mycargus/hello_docker_world:master
     networks:
       - wait-for-docker-network
     ports:
