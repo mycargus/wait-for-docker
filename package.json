@@ -1,0 +1,44 @@
+{
+  "name": "wait-for-docker",
+  "version": "1.0.0",
+  "description": "A slim docker container to determine if other containers are ready for connections",
+  "scripts": {
+    "pretty": "prettier --ignore-path ./.gitignore \"*.+(yaml|yml|js|json|md)\"",
+    "format": "npm run pretty -- --write",
+    "format:check": "npm run pretty -- --list-different",
+    "lint": "npm run lint:dockerfile && npm run format:check",
+    "lint:dockerfile": "dockerfilelint Dockerfile",
+    "test": "./scripts/ci/test.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mycargus/wait-for-docker.git"
+  },
+  "keywords": [
+    "netcat",
+    "waiting",
+    "docker",
+    "container"
+  ],
+  "author": "Michael Hargiss",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mycargus/wait-for-docker/issues"
+  },
+  "homepage": "https://github.com/mycargus/wait-for-docker#readme",
+  "devDependencies": {
+    "dockerfilelint": "^1.5.0",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
+    "prettier": "^2.0.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "Dockerfile": "npm run lint:dockerfile",
+    "*.{yaml|yml|js|json|md}": "npm run format"
+  }
+}
