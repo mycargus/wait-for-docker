@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/mycargus/wait-for-docker.svg?branch=master)](https://travis-ci.org/mycargus/wait-for-docker)
+[![Build Status](https://travis-ci.com/mycargus/wait-for-docker.svg?branch=master)](https://travis-ci.com/mycargus/wait-for-docker)
 
 # wait-for-docker
 
